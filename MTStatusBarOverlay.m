@@ -1163,26 +1163,24 @@ kDetailViewWidth, kHistoryTableRowHeight*kMaxHistoryTableRowCount + kStatusBarHe
 ////////////////////////////////////////////////////////////////////////
 
 - (void)setStatusBarBackgroundForStyle:(UIStatusBarStyle)style {
-	// gray status bar?
-	// on iPad the Default Status Bar Style is black too
-	if (style == UIStatusBarStyleDefault && !IsIPad && !IsIPhoneEmulationMode) {
-        if (self.customBackgroundColor) {
-            statusBarBackgroundImageView_.backgroundColor = self.customBackgroundColor;
-        }
-        else
-        {
-            // choose image depending on size
-            if (self.shrinked) {
-                self.statusBarBackgroundImageView.image = [self.defaultStatusBarImageShrinked stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
-            } else {
-                self.statusBarBackgroundImageView.image = [self.defaultStatusBarImage stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
-            }
-        }
-	}
-	// black status bar? -> no image
-	else {
-		self.statusBarBackgroundImageView.image = nil;
-		statusBarBackgroundImageView_.backgroundColor = [UIColor blackColor];
+	if (self.customBackgroundColor) {
+		statusBarBackgroundImageView_.backgroundColor = self.customBackgroundColor;
+	} else {
+		// gray status bar?
+		// on iPad the Default Status Bar Style is black too
+		if (style == UIStatusBarStyleDefault && !IsIPad && !IsIPhoneEmulationMode) {
+			// choose image depending on size
+			if (self.shrinked) {
+				self.statusBarBackgroundImageView.image = [self.defaultStatusBarImageShrinked stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
+			} else {
+				self.statusBarBackgroundImageView.image = [self.defaultStatusBarImage stretchableImageWithLeftCapWidth:2.0f topCapHeight:0.0f];
+			}
+		}
+		// black status bar? -> no image
+		else {
+			self.statusBarBackgroundImageView.image = nil;
+			statusBarBackgroundImageView_.backgroundColor = [UIColor blackColor];
+		}
 	}
 }
 
